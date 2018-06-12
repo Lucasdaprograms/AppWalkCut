@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+		<head>
+			 <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf8">
+			 <link rel="stylesheet" href="./js/jquerymobile/jquery.mobile-1.4.5.min.css">
+			 <link rel="stylesheet" href="_css/style.css">
+			 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+			 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+			 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		</head>
+	<body>
+                      <!------------------------------------ PAGE DE LOGIN ------------------------------------------->
+			<div data-role="page" data-theme="b" id="LOGIN">
+					<div  data-role="header" data-theme="a" data-position="fixed">
+							  <div class="statusbar-overlay"></div>
+							  <!-- Panels overlay-->
+							  <div class="panel-overlay"></div>
+							  <h1>WalkCut</h1>
+					</div>	
+					<div data-role="main" class="ui-content" >
+					   <img class="logo" alt="mee" src="img/Logo.png"/> 
+					   <h3>Login para Clientes</h3>
+					  <br>  
+						       <div data-role="form" class="form" >
+									<form>
+										<Label for="clogin"> <b> Email:</b><br>
+										<input type="text" name="firstname" placeholder="Digite seu login" name="login" id="loginEmail" required>
+										<br>
+										<Label for="cpsw"> <b> Senha:</b><br>
+										<input type="password" name="lastname" placeholder="Digite sua senha" name="csenha" id="loginSenha" required>
+										<br>
+										<input id="btnLogin" type="button" value="login" class="shadowLogin" data-wrapper-class="ui-custom">
+										<input type="button"  value="Não sou cadastrado" onclick="window.location='#ESCOLHACAD'" id="nsc">
+								
+									</form> 
+								</div>
+								<!-- login como barbeiro -->
+								<a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user" data-transition="pop">LOGIN PARA BARBEIROS</a>
+								<div data-role="popup" id="popupLogin" data-theme="b" class="ui-corner-all">
+								    <form>
+								        <div style="padding:10px 20px;">
+								            <img class="logo" alt="mee" src="img/Logo.png"/>  
+								            <label for="un" class="ui-hidden-accessible">Email:</label>
+								            <input type="text" name="user" id="loginEmailbar" value="" placeholder="username" data-theme="a">
+								            <label for="pw" class="ui-hidden-accessible">Senha:</label>
+								            <input type="password" name="pass" id="loginSenhabar" value="" placeholder="password" data-theme="a">
+								            <input id="btnLoginBar" type="button" value="login" class="shadowLogin" data-wrapper-class="ui-custom">
+								        </div>
+								    </form>
+								</div>
+					</div>			
+				<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
+					<h1>WalkCut</h1>
+				</div> 
+			</div>
+			<!------------------------------------ PAGE ESCOLHA DE CADASTRO ------------------------------------------->
+			<div data-role="page" data-theme="b" id="ESCOLHACAD">
+					<div  data-role="header" data-theme="a"  data-position="fixed">
+						  <h1>WalkCut</h1>
+						  <a onclick="window.location='index.html'" class="previous">&laquo; </a>
+						  <!-- <a href="#" class="next"> &raquo;</a> -->
+					</div>	
+					<div data-role="main" class="ui-content" >
+					    <img class="logo" alt="mee" src="img/Logo.png"/>   
+					        <br>  
+						    <div data-role="form" class="form" >
+								<input type="submit" value="Cadastro de Cliente" onclick="window.location='#CADCLIENTE'">
+								<input type="submit" value="Cadastro de Barbeiro" onclick="window.location='#CADBARBEIRO'">  
+							</div>
+					</div>
+				<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
+					<h1>WalkCut</h1>
+				</div> 
+	        </div>
+					  <!--------------------------------------- PAGE CADASTRO DE CLIENTE --------------------------------------------->	
+			<div data-role="page" data-theme="b" id="CADCLIENTE">
+				<div  data-role="header" data-theme="a" data-position="fixed">
+					  <h1>WalkCut</h1>
+					  <a onclick="window.location='#LOGIN'" class="previous">&laquo; </a>
+					 <!-- <a onclick="window.location='1.html'"  class="next"> &raquo;</a> -->
+				</div>		
+				<div data-role="main" class="ui-content" >			
+						 <img class="logo" alt="mee" src="img/Logo.png"/>   								 								 
+							<center>
+										   <br><br><hr>
+								<label for="registerNome"><b>Nome:</b></label>
+								<input type="text"  id="registerNome" placeholder="nome" data-wrapper-class="ui-custom">
+								<label for="registerEmail"><b>Email:</b></label>
+								<input type="email" id="registerEmail" placeholder="e-mail" data-wrapper-class="ui-custom">
+								<label for="registerTelefone"><b>Telefone:</b></label>
+								<input type="text" id="registerTelefone" placeholder="telefone" data-wrapper-class="ui-custom">
+								<label for="registerSenha"><b>Senha:</b></label>
+								<input type="password" id="registerSenha" placeholder="senha" data-wrapper-class="ui-custom">
+								<label for="registerConfirmarSenha"><b>Confirmar Senha:</b></label>
+								<input type="password" id="registerConfirmarSenha" placeholder="confirmar senha" data-wrapper-class="ui-custom">
+								
+								<br><br>
+								<input id="btnRegisterUser" type="button" value="registrar" data-wrapper-class="ui-custom">
+								<hr>
+								<input type="button"  value="Voltar" onclick="window.location='#LOGIN'" id="nsc">
+							</center>
+						<div data-role="footer" class="footer" data-theme="a" data-position="fixed"-->
+								<h1>WalkCut</h1>
+						</div> 
+				</div>
+			</div>	
+			<!--------------------------------------- PAGE CADASTRO DE BARBEIRO --------------------------------------------->	
+			<div data-role="page" data-theme="b" id="CADBARBEIRO">
+				<div  data-role="header" data-theme="a" data-position="fixed">
+					  <h1>WalkCut</h1>
+					  <a onclick="window.location='#LOGIN'" class="previous">&laquo; </a>
+					 <!-- <a onclick="window.location='1.html'"  class="next"> &raquo;</a> -->
+				</div>		
+				<div data-role="main" class="ui-content" >			
+						 <img class="logo" alt="mee" src="img/Logo.png"/>   								 								 
+						    
+							<center>
+										   <br><br><hr>
+								<label for="registerNomebar"><b>Nome:</b></label>
+								<input type="text"  id="registerNomebar" placeholder="nome" data-wrapper-class="ui-custom">
+								<label for="registerEmailbar"><b>Email:</b></label>
+								<input type="email" id="registerEmailbar" placeholder="e-mail" data-wrapper-class="ui-custom">
+								<label for="registerTelefonebar"><b>Telefone:</b></label>
+								<input type="text" id="registerTelefonebar" placeholder="telefone" data-wrapper-class="ui-custom">
+								<label for="registerSenhabar"><b>Senha:</b></label>
+								<input type="password" id="registerSenhabar" placeholder="senha" data-wrapper-class="ui-custom">
+								<label for="registerConfirmarSenhabar"><b>Confirmar Senha:</b></label>
+								<input type="password" id="registerConfirmarSenhabar" placeholder="confirmar senha" data-wrapper-class="ui-custom">
+								
+								<br><br>
+								<input id="btnRegisterBar" type="button" value="registrar" data-wrapper-class="ui-custom">
+								<hr>
+								<input type="button"  value="Voltar" onclick="window.location='#LOGIN'" id="nsc">
+							</center>
+							
+						<div data-role="footer" class="footer" data-theme="a" data-position="fixed"-->
+								<h1>WalkCut</h1>
+						</div> 
+				</div>
+			</div>	
+					<!--------------------------------------- PAGE PERFIL --------------------------------------------->
+			<div data-role="page" id="profile" data-title="profile" data-theme="b" data-position="fixed">
+				<div data-role="header" data-theme="a">
+					<h1>Meu Perfil</h1>
+					<a data-role="button"  onclick="window.location='#CLIENTELOG'" data-icon="home" data-corners="false">Home</a>
+				</div>
+				<div data-role="content">
+									<!-- profile image -->
+									<img id="imgTestClick" src="img/perfil.png" alt="mee" />
+									<!-- my profile -->
+					<div data-role="collapsible-set">
+							<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">
+								<h2 class="ui-collapsible-heading"><a class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-btn-up-d" href="#" data-corners="false" data-shadow="false" data-iconshadow="true" data-icon="plus" data-iconpos="left" data-theme="d">
+									<span class="ui-btn-text">Perfil Pessoal</span>
+								</a></h2>
+								<div class="ui-body ui-body-d ui-textalign-left">
+									<!-- profile fields -->
+									<div class="tablerow">
+										<div class="left-table">Nome:</div>
+										<div id="divAppendNome" class="right-table"></div>
+									</div>								   
+									<div class="tablerow">
+										<div class="left-table">Email:</div>
+										<div id="divAppendEmail" class="right-table"></div>
+									</div>
+								</div>
+								
+									<div id="PUsername">
+									</div>
+							
+							</div>
+							
+						<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
+							<h2>WalkCut</h2>
+						</div>
+					</div>
+				</div>			
+			</div>			
+					<!------------------------------------ PAGE CLIENTE LOGADO ------------------------------------------->	
+			<div data-role="page" data-theme="b" id="CLIENTELOG">
+				<div  data-role="header" data-theme="a" data-position="fixed">
+					 <h1>WalkCut</h1>
+					 <a href="#add-form" data-icon="bars" data-iconpos="notext">Menu</a>
+				</div>	
+				<div data-role="panel" data-position="left" data-position-fixed="true" data-display="reveal" data-theme="a" id="add-form" >
+				<a href="#profile"  class="ui-btn ui-icon-user ui-btn-icon-top">Meu Perfil</a>
+				    <ul data-role="listview">
+			                <li><a href="#panel-fixed-page2">Configurações</a></li>
+							<li><a href="#panel-fixed-page2" onclick="sair()">Sair</a></li>
+			        </ul>
+    			</div><!-- /panel -->
+				<div role="main" class="ui-content jqm-content jqm-fullwidth">
+				</div>
+			</div>
+	<!--<script type="text/javascript" src="scripts/cadastro-user.js"></script>-->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="scripts/index1.js"></script>
+  
+	</body>
+</html>
+

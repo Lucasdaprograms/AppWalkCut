@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf8">
+ <link rel="stylesheet" href="./js/jquerymobile/jquery.mobile-1.4.5.min.css">
+ <link rel="stylesheet" href="_css/style.css">
+ <script src="./js/jquery-2.2.4.min.js"></script>
+ <script src="./js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+</head>
+ <body>
+ <div data-role="page" data-theme="b" >
+    <div  data-role="header" data-theme="a" data-position="fixed">
+	 <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+      <h1>WalkCut</h1>
+    </div>	
+			
+					<div data-role="main" class="ui-content" >
+					   <img class="imglogo" align="center-right" width="100px" height="99px" src="_imagens/Logo.png"/>  
+					  <br>  
+						       <div data-role="form" class="form" >
+								<form>
+								<Label for="clogin"> <b> Login:</b><br>
+								<input type="text" name="firstname" placeholder="Digite seu login" name="login" id="clogin" required>
+								<br>
+								<Label for="cpsw"> <b> Senha:</b><br>
+								<input type="password" name="lastname" placeholder="Digite sua senha" name="psw" id="cpsw" required>
+								<br>
+								
+								<input type="submit" value="Entrar" id="ientrar">
+								<input type="button"  value="Não sou cadastrado" onclick="window.location='2.html'" id="nsc">
+							
+								</form> 
+								<label>
+									<input type="checkbox" checked="checked" name="remember" style="margin-bottom:10px"> Lembrar-me
+								</label> 
+								</div>
+					</div>
+					
+				<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
+					<h1>WalkCut</h1>
+				</div> 
+  
+	</div>	<!--PAGE-->
+	
+			
+    
+</body>
+</html>

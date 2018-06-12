@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf8">
+ <link rel="stylesheet" href="./js/jquerymobile/jquery.mobile-1.4.5.min.css">
+ <link rel="stylesheet" href="_css/style.css">
+ <script src="./js/jquery-2.2.4.min.js"></script>
+ <script src="./js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+ <script type="text/javascript" src="scripts/banco.js"></script>
+
+			 <script>
+				function funcao1()
+					{
+					var x;
+					var r=confirm("Deseja mesmo cancelar seu cadastro?");
+					if (r==true)
+					  {
+					   window.location.href = "2.html";
+					  }
+					else
+					  {
+					  x="Você pressionou Cancelar!";
+					  }
+					document.getElementById("demo").innerHTML=x;
+					}
+			</script>
+			 
+</head>
+<body>
+ <div data-role="page" data-theme="b" >
+     <div  data-role="header" data-theme="a" data-position="fixed">
+      <h1>WalkCut</h1>
+	  <a onclick="window.location='2.html'" class="previous">&laquo; </a>
+	 <!-- <a onclick="window.location='1.html'"  class="next"> &raquo;</a> -->
+    </div>		
+			<div data-role="main" class="ui-content" >
+				
+
+		        <img class="imglogo" align="center-right" width="100px" height="99px" src="_imagens/Logo.png"/>  
+									 
+									 
+				  <form id="cadastro" >
+                	<input type="hidden" id="field-id" value="" />
+                    	
+					  <h2><center>Cadastro de Barbeiro</center></h2>
+					  
+					  <hr>
+					  <label for="nome" ><b>Nome:</b></label>
+					  <input type="text" placeholder="Digite seu nome" id="nome" name="nome" required>
+					    
+					  <label for="senha"><b>Senha:</b></label>
+					  <input type="password" placeholder="Digite sua senha" id="senha" name="pswbar" required>
+					    
+					  <label for="email"><b>Email:</b></label>
+					  <input type="text" placeholder="Digite seu email" id="email" name="email" required>
+						
+					  <label for="date"><b>Data de nascimento:</b></label>
+					  <input type="date" name="date" id="data_nascimento" required>
+					  
+					  <label for="cpf"><b>CPF:</b></label>
+					  <input type="password" placeholder="Digite seu CPF" id="cpf" name="cpf" required>
+					  
+					   <br>
+					 <label for="select-choice-1" class="select"><b>Sexo:</b></label>
+							<select name="select-choice-mini" id="cmbSexo"  required>
+								<option value="masculino">Masculino</option>
+								<option value="feminino">Feminino</option>
+							</select>
+					  <br><br>
+					  
+					<label for="endereco"><b>Endereço:</b></label>
+					<input type="text" name="endereco" id="endereco" value="" placeholder="Endereço" required>
+					
+					<label for="bairro"><b>Bairro:</b></label> 
+					<input type="text" name="bairro" id="bairro" value="" placeholder="Bairro" required>
+					
+					<label for="cidade" ><b>Cidade:</b></cidade>
+                    <input type="text" name="cidade" id="cidade" value="" placeholder="Cidade" required>
+					
+					<label for="estado" ><b>Estado:</b></label>
+                    <input type="text" name="estado" id="estado" value="" placeholder="Estado" required>
+					
+					<label for="telefone"><b>Telefone:</b></label>
+					<input type="text" placeholder="Digite seu telefone" id="telefone" name="telefone" required>
+					  
+					  
+
+					  				  				  
+                    <br>
+                    <a data-role="button"  id="btnCadastrarcli">Cadastrar</a>
+                    <button onclick="funcao1()" type="button" class="cancelbtn">Cancelar</button> 
+                </form>
+			
+			
+					<div data-role="footer" class="footer" data-theme="a" data-position="fixed"-->
+					<h1>WalkCut</h1>
+					</div> 
+</div>
+
+
+</body>
+</html>

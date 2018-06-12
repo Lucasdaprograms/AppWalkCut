@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="www.frebsite.nl" />
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
+
+		<title>WalkCut</title>
+
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="_css/demo.css" />
+		<link rel="stylesheet" href="./js/jquerymobile/jquery.mobile-1.4.5.min.css">
+		<link rel="stylesheet" href="_css/style.css">
+		<script src="./js/jquery-2.2.4.min.js"></script>
+		<script src="./js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+		<link rel="stylesheet" href="dist/jquery.mmenu.all.css" />
+
+		<style>
+			@media (min-width: 992px) {
+				.header a {
+					display: none;
+				}
+			}
+
+			.mm-navbar_tabs span {
+				display: inline-block;
+				margin-left: 8px;
+			}
+			@media (max-width: 450px) {
+				.mm-navbar_tabs span {
+					display: none;
+				}
+			}
+		</style>
+
+		<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="dist/jquery.mmenu.all.js"></script>
+		<script>
+			$(function() {
+				$('nav#menu').mmenu({
+					extensions	: [ 'theme-dark' ],
+					setSelected	: true,
+					counters	: true,
+					searchfield : {
+						placeholder		: 'Procurar por itens'
+					},
+					iconbar		: {
+						add 		: true,
+						size		: 40,
+						top 		: [ 
+							'<a href=""><span class=""></span></a>'
+						],
+						bottom 		: [
+							'<a href="https://twitter.com/"><span class="fa fa-twitter"></span></a>',
+							'<a href="https://www.facebook.com/"><span class="fa fa-facebook"></span></a>',
+							'<a href="https://www.youtube.com/"><span class="fa fa-youtube"></span></a>'
+						]
+					},
+					sidebar		: {
+						collapsed		: {
+							use 			: '(min-width: 450px)',
+							size			: 40,
+							hideNavbar		: false
+						},
+						expanded		: {
+							use 			: '(min-width: 992px)',
+							size			: 35
+						}
+					},
+					navbars		: [
+						{
+							content		: [ 'searchfield' ]
+						}, {
+							type		: 'tabs',
+							content		: [ 
+								'<a href="#panel-menu"><i class="fa fa-bars"></i> <span>Menu</span></a>', 
+								'<a href="#panel-account"><i class="fa fa-user"></i> <span>Account</span></a>'
+								
+							]
+						}, {
+							content		: [ 'prev', 'breadcrumbs', 'close' ]
+						}, 
+					]
+				}, {
+					searchfield : {
+						clear 		: true
+					},
+					navbars		: {
+						breadcrumbs	: {
+							removeFirst	: true
+						}
+					}
+				});
+
+				$('a[href^="#/"]').click(function() {
+					alert( 'Não tem nada' );
+					return false;
+				})
+				
+			
+			});
+				function Sair()
+			{
+			var x;
+			var r=confirm("Deseja mesmo sair?");
+			if (r==true)
+			  {
+			   window.location.href = "index.html";
+			  }
+			
+			document.getElementById("demo").innerHTML=x;
+			}
+		</script>
+		
+			
+	</head>
+	<body>
+		<div id="page" data-role="page" data-theme="b">
+			<div class="header"   data-position="fixed">
+				<a href="#menu"><span></span></a>
+				WalkCut
+			</div>
+			
+				<div data-role="content" >
+				<h3 class="ui-bar ui-bar-a">Serviços Agendados</h3>
+				<div class="ui-grid-b">
+					<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:300px">Nome:</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:300px">Local:</div></div>
+					<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:300px">Horário:</div></div>
+				</div><!-- /grid-b -->
+								
+				
+		
+					
+					
+				</div>
+			
+			<nav id="menu">
+				<div id="panel-menu">
+					<ul>
+						<li><a href="#/">Início</a></li>
+						<li><a href="#/">Contato</a></li>
+					
+					</ul>
+				</div>
+
+				<div id="panel-account">
+					<ul>
+						<li><a  onclick="window.location='PERFILCI.html'">Meu perfil</a></li>
+						<li><a onclick="Sair()">Sair</a></li>
+					</ul>
+				</div>
+
+
+			</nav>
+			<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
+					<h1>WalkCut</h1>
+				</div> 
+		</div>
+	</body>
+</html>
