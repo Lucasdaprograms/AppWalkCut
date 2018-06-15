@@ -12,7 +12,7 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
 	    this.loginTable();
-        
+        app.atMostrar();
         document.getElementById('btnRegisterUser').addEventListener('click', this.dbRegisterUser);
 		document.getElementById('btnRegisterBar').addEventListener('click', this.dbRegisterBar);
         document.getElementById('btnLogin').addEventListener('click', this.dbMakeLogin);
@@ -243,7 +243,34 @@ var app = {
 				});
 			}
 		},
-
-  
-};
+//----------------------------------------------------------------------------------- MOSTRAR BARBEIRO ------------------------------------------------------------------------	
+	 atMostrar: function(){$.ajax({
+            type: "GET",
+            url: "http://localhost/index.php",
+            data: {
+                acao: 'usuarios',
+            },
+            dataType: "json",
+            success: function (json) {
+                if(json){
+					console.log(json);
+						var tr="";
+						for(var i = 0; i < json.length; i++){
+							tr += '<tr>';
+							tr += '<td>' + json[i].email + '</td>';
+							tr += '<td>' + json[i].nome + '</td>';
+							tr += '</tr>';        
+							document.getElementById('CLIENTELOG').innerHTML = tr;           
+						}
+                }
+                else{
+					console.log(json);
+                }
+            },
+            error: function(){
+                console.log("##cliente::error");
+            }
+        })
+	 }
+}
 app.initialize();
