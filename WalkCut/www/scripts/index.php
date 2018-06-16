@@ -12,7 +12,7 @@ switch ($request['acao']) {
 		
 		//Consultando banco de dados
 		$vetor;
-		$qryLista = mysqli_query($conn, "SELECT * FROM usuario");   
+		$qryLista = mysqli_query($conn, "SELECT * FROM barbeiro");   
 		while($resultado = mysqli_fetch_assoc($qryLista)){
 			$vetor[] = array_map('utf8_encode', $resultado); 
 		}    		
@@ -119,8 +119,10 @@ switch ($request['acao']) {
 		$nome = addslashes($_POST['nome']);
 		$email = addslashes($_POST['email']);
 		$telefone = addslashes($_POST['telefone']);
+		$endereco = addslashes($_POST['endereco']);
+		$horario = addslashes($_POST['horario']);
 		$senha = addslashes($_POST['senha']);	
-		$sql = "INSERT INTO barbeiro (nome, email, telefone, senha) VALUES ('$nome', '$email', '$telefone', '$senha')";
+		$sql = "INSERT INTO barbeiro (nome, email, telefone, endereco, horario, senha) VALUES ('$nome', '$email', '$telefone', '$endereco', '$horario', '$senha')";
 		$arr = array();
 		$arr['result'] = false;
 		$arr['err'] = 'vazio';

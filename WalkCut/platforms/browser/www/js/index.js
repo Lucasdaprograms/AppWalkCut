@@ -162,7 +162,7 @@ var app = {
                         var sql = "INSERT INTO logado (pk_id, nome, email, telefone, senha) VALUES ('"+json.pk_id+"', '"+json.nome+"', '"+json.email+"', '"+json.telefone+"', '"+json.senha+"')";
                         console.log("##cliente::Logado>"+sql);
                         tx.executeSql(sql);
-                        $.mobile.changePage("#CLIENTELOG");
+                        $.mobile.changePage("#BARBEIROLOG");
                     });
                 }
                 else if(json.result == false && json.alert == true){
@@ -179,6 +179,8 @@ var app = {
 			var vNome = document.getElementById('registerNomebar').value;
 			var vEmail = document.getElementById('registerEmailbar').value;
 			var vTelefone= document.getElementById('registerTelefonebar').value;
+			var vEndereco= document.getElementById('registerEndereco').value;
+			var vHorario= document.getElementById('registerHorario').value;
 			var vSenha = document.getElementById('registerSenhabar').value;
 			var vSSenha = document.getElementById('registerConfirmarSenhabar').value;
 			if(vNome==""){
@@ -214,6 +216,8 @@ var app = {
 						nome: vNome,
 						email: vEmail,
 						telefone: vTelefone,
+						endereco: vEndereco,
+						horario: vHorario,
 						senha: vSenha
 					},
 					dataType: "json", 
@@ -232,6 +236,8 @@ var app = {
 							document.getElementById('registerNomebar').value = "";
 							document.getElementById('registerEmailbar').value = "";
 							document.getElementById('registerTelefonebar').value = "";
+							document.getElementById('registerEndereco').value = "";
+							document.getElementById('registerHorario').value = "";
 							document.getElementById('registerSenhabar').value = "";
 							document.getElementById('registerConfirmarSenhabar').value = "";
 							$.mobile.changePage('#LOGIN');
@@ -256,11 +262,43 @@ var app = {
 					console.log(json);
 						var tr="";
 						for(var i = 0; i < json.length; i++){
-							tr += '<tr>';
-							tr += '<td>' + json[i].email + '</td>';
-							tr += '<td>' + json[i].nome + '</td>';
-							tr += '</tr>';        
-							document.getElementById('CLIENTELOG').innerHTML = tr;           
+							tr += '<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">'
+							tr +=	'<h2 class="ui-collapsible-heading"><a class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-btn-up-d" href="#" data-corners="false" data-shadow="false" data-iconshadow="true" data-icon="plus" data-iconpos="left" data-theme="d">'
+							tr +=		'<span class="ui-btn-text">' + json[i].nome +'</span>'
+							tr +=	'</a></h2>'
+							tr +=	'<div class="ui-body ui-body-d ui-textalign-left">'
+							tr +=		'<!-- profile fields -->'		   
+							tr +=		'<div class="tablerow">'
+							tr +=			'<div class="left-table">Email</div>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>'+ json[i].email 
+							tr +=       '<hr>'
+							tr +=		'<div class="tablerow">'
+							tr +=			'<div class="left-table">Telefone</div>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>'+ json[i].telefone
+							tr +=       '<hr>'
+							tr +=		'<div class="tablerow">'
+							tr +=			'<center><div class="left-table" >Endereco</div></center>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>' + json[i].endereco
+							tr +=       '<hr>'
+							tr +=		'<div class="tablerow">'
+							tr +=			'<div class="left-table">Funcionamento</div>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>' + json[i].horario 
+							tr +=		'<a href="#agendar" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-mail" data-transition="pop">AGENDAR CORTE</a>'
+							tr +=		'</div>'
+							tr +=	'</div>'
+							tr +=   '<div data-role="popup" id="agendar" data-theme="b" class="ui-corner-all">'
+							tr +=	    '<form>'
+							tr +=	        '<div style="padding:10px 20px;">'
+							tr +=	            '<h3> Digite seus dados </h3> '
+							tr +=	       ' </div>'
+							tr +=	    '</form>'
+							tr +=	'</div>'
+							
+							document.getElementById('MOSTRAR').innerHTML = tr;           
 						}
                 }
                 else{

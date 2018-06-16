@@ -12,13 +12,17 @@ switch ($request['acao']) {
 		
 		//Consultando banco de dados
 		$vetor;
-		$qryLista = mysqli_query($conn, "SELECT * FROM usuario");    
+		$qryLista = mysqli_query($conn, "SELECT * FROM usuario");   
 		while($resultado = mysqli_fetch_assoc($qryLista)){
 			$vetor[] = array_map('utf8_encode', $resultado); 
-		}    
-		
+		}    		
 		//Passando vetor em forma de json
-		echo json_encode($vetor);
+		if($vetor){
+			echo json_encode($vetor);
+		}
+		else{
+			echo "Sem usuarios";
+		}
 	break;
 	/* ----------------------------- */
 	case "login":
