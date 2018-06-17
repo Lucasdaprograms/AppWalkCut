@@ -25,6 +25,24 @@ switch ($request['acao']) {
 		}
 	break;
 	/* ----------------------------- */
+	case "veragendamentos":
+		if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
+		
+		//Consultando banco de dados
+		$vetor;
+		$qryLista = mysqli_query($conn, "SELECT * FROM agendamentos");   
+		while($resultado = mysqli_fetch_assoc($qryLista)){
+			$vetor[] = array_map('utf8_encode', $resultado); 
+		}    		
+		//Passando vetor em forma de json
+		if($vetor){
+			echo json_encode($vetor);
+		}
+		else{
+			echo "Sem usuarios";
+		}
+	break;
+	/* ----------------------------- */
 	case "login":
 		$email = addslashes($_POST['email']);
 		$senha = addslashes($_POST['senha']);
@@ -158,12 +176,12 @@ switch ($request['acao']) {
 		$telefone = addslashes($_POST['telefone']);
 		$data = addslashes($_POST['data']);
 		$endereco = addslashes($_POST['endereco']);
-		$local = addslashes($_POST['local']);	
-		$sql = "INSERT INTO agendamento (nome, telefone, data, endereco, local) VALUES ('$nome', '$telefone', '$data', '$endereco', '$local')";
+		$local = addslashes($_POST['local']);
+		$sql = "INSERT INTO agendamentos(nome, telefone, data, endereco, local) VALUES ('$nome', '$telefone', '$data', '$endereco', '$local')";
 		$arr = array();
 		$arr['result'] = false;
 		$arr['err'] = 'vazio';
-		else if ($conn->query($sql)) {			
+		if ($conn->query($sql)) {			
 			$arr['result'] = true;
 			$arr['alert'] = false;
 			$arr['err'] = "##server::New record created successfully";
@@ -175,7 +193,6 @@ switch ($request['acao']) {
 		}	
 		echo json_encode($arr);		
 	break;
-	
 }
 
 ?>
