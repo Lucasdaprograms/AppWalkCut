@@ -13,10 +13,12 @@ var app = {
     onDeviceReady: function() {
 	    this.loginTable();
         app.atMostrar();
+		app.vAgenda();
         document.getElementById('btnRegisterUser').addEventListener('click', this.dbRegisterUser);
 		document.getElementById('btnRegisterBar').addEventListener('click', this.dbRegisterBar);
         document.getElementById('btnLogin').addEventListener('click', this.dbMakeLogin);
 		document.getElementById('btnLoginBar').addEventListener('click', this.dbMakeLoginBar);
+		document.getElementById('BtnAgendar').addEventListener('click', this.Agendamento);
     },
 	
 	goToPageRegister: function(){
@@ -59,6 +61,7 @@ var app = {
 							console.log(result);
 							document.getElementById('divAppendNome').append(result.rows[0].nome);
 							document.getElementById('divAppendEmail').append(result.rows[0].email);
+							document.getElementById('divAppendTel').append(result.rows[0].telefone);
 						});
                     });
                 }
@@ -124,7 +127,7 @@ var app = {
 					    alert(json.err);
                     }
                     else if(json.result == true){
-					    alert('cadastrado com sucesso');
+					    alert('Cadastrado com sucesso');
                         document.getElementById('registerNome').value = "";
                         document.getElementById('registerEmail').value = "";
                         document.getElementById('registerTelefone').value = "";
@@ -163,6 +166,13 @@ var app = {
                         console.log("##cliente::Logado>"+sql);
                         tx.executeSql(sql);
                         $.mobile.changePage("#BARBEIROLOG");
+						var ssql = "select * from logado where email = '"+ json.email +"'";
+						tx.executeSql(ssql, [], function (tx, result) {
+							console.log(result);
+							document.getElementById('divAppendNomebar').append(result.rows[0].nome);
+							document.getElementById('divAppendEmailbar').append(result.rows[0].email);
+							document.getElementById('divAppendTelbar').append(result.rows[0].telefone);
+						});
                     });
                 }
                 else if(json.result == false && json.alert == true){
@@ -232,7 +242,7 @@ var app = {
 							alert(json.err);
 						}
 						else if(json.result == true){
-							alert('cadastrado com sucesso');
+							alert('Cadastrado feito com sucesso');
 							document.getElementById('registerNomebar').value = "";
 							document.getElementById('registerEmailbar').value = "";
 							document.getElementById('registerTelefonebar').value = "";
@@ -287,17 +297,9 @@ var app = {
 							tr +=			'<div class="left-table">Funcionamento</div>'
 							tr +=			'<div  class="right-table"></div>'
 							tr +=		'</div>' + json[i].horario 
-							tr +=		'<a href="#agendar" data-rel="popup" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-mail" data-transition="pop">AGENDAR CORTE</a>'
+							tr +=		'<a href="#Agendar" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-mail" data-transition="pop">AGENDAR CORTE</a>'
 							tr +=		'</div>'
 							tr +=	'</div>'
-							tr +=   '<div data-role="popup" id="agendar" data-theme="b" class="ui-corner-all">'
-							tr +=	    '<form>'
-							tr +=	        '<div style="padding:10px 20px;">'
-							tr +=	            '<h3> Digite seus dados </h3> '
-							tr +=	       ' </div>'
-							tr +=	    '</form>'
-							tr +=	'</div>'
-							
 							document.getElementById('MOSTRAR').innerHTML = tr;           
 						}
                 }
@@ -309,6 +311,113 @@ var app = {
                 console.log("##cliente::error");
             }
         })
-	 }
+	 },
+//----------------------------------------------------------------------------------- REGISTRAR AGENDAMENTO ------------------------------------------------------------------------		 
+	Agendamento: function(){
+			var vNome = document.getElementById('AgndNome').value;
+			var vTelefone= document.getElementById('AgndTelefone').value;
+			var vData= document.getElementById('AgndData').value;
+			var vEndereco= document.getElementById('AgndEndereco').value;
+			var vLocal = document.getElementById('AgndLocal').value;
+			
+			if(vNome==""){
+				alert('O campo nome deve estar preenchido');
+			}
+			else if(vTelefone==""){
+				alert('O campo telefone deve estar preenchido');
+			}
+			else if(vTelefone.length<9){
+				alert('O campo telefone deve conter um telefone válido');
+			} else{
+				$.ajax({
+					type: "POST",
+					url: "http://localhost/index.php",
+					data: {
+						acao:'agendamento',
+						nome: vNome,
+						telefone: vTelefone,
+						data: vData,
+						endereco: vEndereco,
+						local: vLocal
+					},
+					dataType: "json", 
+					success: function (json) {
+						if(json.result == true){
+							console.log(json.err);
+						}
+						else{
+							console.log(json.err);
+						}
+						if(json.alert == true){
+							alert(json.err);
+						}
+						else if(json.result == true){
+							alert('Agendamento feito com sucesso');
+							document.getElementById('AgndNome').value = "";
+							document.getElementById('AgndTelefone').value = "";
+							document.getElementById('AgndData').value = "";
+							document.getElementById('AgndEndereco').value = "";
+							
+						}
+					},
+					error: function(){
+						console.log("##error");
+					}
+				});
+			}
+		},
+//----------------------------------------------------------------------------------- VER AGENDAMENTOS ------------------------------------------------------------------------
+	vAgenda: function(){$.ajax({
+            type: "GET",
+            url: "http://localhost/index.php",
+            data: {
+                acao: 'veragendamentos',
+            },
+            dataType: "json",
+            success: function (json) {
+                if(json){
+					console.log(json);
+						var tr="";
+						for(var i = 0; i < json.length; i++){
+							tr += '<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">'
+							tr +=	'<h2 class="ui-collapsible-heading"><a class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-btn-up-d" href="#" data-corners="false" data-shadow="false" data-iconshadow="true" data-icon="plus" data-iconpos="left" data-theme="d">'
+							tr +=		'<span class="ui-btn-text">'+ json[i].nome +'</span>'
+							tr +=	'</a></h2>'
+							tr +=	'<div class="ui-body ui-body-d ui-textalign-left">'
+							tr +=		'<!-- profile fields -->'		  
+							tr +=       '<hr>'
+							tr +=		'<div class="tablerow">'
+							tr +=			'<div class="left-table">Telefone</div>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>'+ json[i].telefone
+							tr +=       '<hr>'
+							tr +=		'<div class="tablerow">'
+							tr +=			'<div class="left-table">Data</div>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>' + json[i].data
+							tr +=		'<hr>'
+							tr +=		'<div class="tablerow">'
+							tr +=			'><div class="left-table">Endereço</div>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>' + json[i].endereco
+							tr +=       '<hr>'
+							tr +=		'<div class="tablerow">'
+							tr +=			'<div class="left-table">Local</div>'
+							tr +=			'<div  class="right-table"></div>'
+							tr +=		'</div>' + json[i].local 
+							tr +=		'</div>'
+							tr +=	'</div>'
+						 document.getElementById('MOSTRARAGEND').innerHTML = tr;           
+						}
+                }
+                else{
+					console.log(json);
+                }
+            },
+            error: function(){
+                console.log("##cliente::error");
+            }
+        })
+	 }	
 }
 app.initialize();

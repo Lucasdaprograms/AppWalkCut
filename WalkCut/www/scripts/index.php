@@ -152,6 +152,30 @@ switch ($request['acao']) {
 		}	
 		echo json_encode($arr);		
 	break;
+	/*---------------------------------------------------------------------------*/
+	case "agendamento":
+		$nome = addslashes($_POST['nome']);
+		$telefone = addslashes($_POST['telefone']);
+		$data = addslashes($_POST['data']);
+		$endereco = addslashes($_POST['endereco']);
+		$local = addslashes($_POST['local']);	
+		$sql = "INSERT INTO agendamento (nome, telefone, data, endereco, local) VALUES ('$nome', '$telefone', '$data', '$endereco', '$local')";
+		$arr = array();
+		$arr['result'] = false;
+		$arr['err'] = 'vazio';
+		else if ($conn->query($sql)) {			
+			$arr['result'] = true;
+			$arr['alert'] = false;
+			$arr['err'] = "##server::New record created successfully";
+		} 
+		else {
+			$arr['result'] = false;
+			$arr['alert'] = true;
+			$arr['err'] = "##server::Unknown Error: '$sql'";
+		}	
+		echo json_encode($arr);		
+	break;
+	
 }
 
 ?>

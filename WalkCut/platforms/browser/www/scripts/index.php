@@ -12,7 +12,7 @@ switch ($request['acao']) {
 		
 		//Consultando banco de dados
 		$vetor;
-		$qryLista = mysqli_query($conn, "SELECT * FROM usuario");   
+		$qryLista = mysqli_query($conn, "SELECT * FROM barbeiro");   
 		while($resultado = mysqli_fetch_assoc($qryLista)){
 			$vetor[] = array_map('utf8_encode', $resultado); 
 		}    		
@@ -119,8 +119,10 @@ switch ($request['acao']) {
 		$nome = addslashes($_POST['nome']);
 		$email = addslashes($_POST['email']);
 		$telefone = addslashes($_POST['telefone']);
+		$endereco = addslashes($_POST['endereco']);
+		$horario = addslashes($_POST['horario']);
 		$senha = addslashes($_POST['senha']);	
-		$sql = "INSERT INTO barbeiro (nome, email, telefone, senha) VALUES ('$nome', '$email', '$telefone', '$senha')";
+		$sql = "INSERT INTO barbeiro (nome, email, telefone, endereco, horario, senha) VALUES ('$nome', '$email', '$telefone', '$endereco', '$horario', '$senha')";
 		$arr = array();
 		$arr['result'] = false;
 		$arr['err'] = 'vazio';
@@ -150,6 +152,30 @@ switch ($request['acao']) {
 		}	
 		echo json_encode($arr);		
 	break;
+	/*---------------------------------------------------------------------------*/
+	case "agendamento":
+		$nome = addslashes($_POST['nome']);
+		$telefone = addslashes($_POST['telefone']);
+		$data = addslashes($_POST['data']);
+		$endereco = addslashes($_POST['endereco']);
+		$local = addslashes($_POST['local']);	
+		$sql = "INSERT INTO agendamento (nome, telefone, data, endereco, local) VALUES ('$nome', '$telefone', '$data', '$endereco', '$local')";
+		$arr = array();
+		$arr['result'] = false;
+		$arr['err'] = 'vazio';
+		else if ($conn->query($sql)) {			
+			$arr['result'] = true;
+			$arr['alert'] = false;
+			$arr['err'] = "##server::New record created successfully";
+		} 
+		else {
+			$arr['result'] = false;
+			$arr['alert'] = true;
+			$arr['err'] = "##server::Unknown Error: '$sql'";
+		}	
+		echo json_encode($arr);		
+	break;
+	
 }
 
 ?>

@@ -130,7 +130,7 @@
 								<input type="text" id="registerTelefonebar" placeholder="Telefone" data-wrapper-class="ui-custom">
 								
 								<label for="registerEndereco"><b>Endereço:</b></label>
-								<input type="text" id="registerEndereco" placeholder="endereco" data-wrapper-class="ui-custom">
+								<input type="text" id="registerEndereco" placeholder="Endereço" data-wrapper-class="ui-custom">
 								
 								<label for="registerHorario"><b>Horário e dias de atentimento:</b></label>
 								<input type="text" id="registerHorario" placeholder="ex: Seg a Sex: 08:00 as 12:00" data-wrapper-class="ui-custom">
@@ -142,7 +142,7 @@
 								<input type="password" id="registerConfirmarSenhabar" placeholder="Confirmar senha" data-wrapper-class="ui-custom">
 								
 								<br><br>
-								<input id="btnRegisterBar" type="button" value="registrar" data-wrapper-class="ui-custom">
+								<input id="btnRegisterBar" type="button" value="Registrar" data-wrapper-class="ui-custom">
 								<hr>
 								<input type="button"  value="Voltar" onclick="window.location='#LOGIN'" id="nsc">
 							</center>
@@ -152,7 +152,7 @@
 						</div> 
 				</div>
 			</div>	
-					<!--------------------------------------- PAGE PERFIL --------------------------------------------->
+					<!--------------------------------------- PAGE PERFIL CLIENTE --------------------------------------------->
 			<div data-role="page" id="profile" data-title="profile" data-theme="b" data-position="fixed">
 				<div data-role="header" data-theme="a">
 					<h1>Meu Perfil</h1>
@@ -177,6 +177,10 @@
 										<div class="left-table">Email:</div>
 										<div id="divAppendEmail" class="right-table"></div>
 									</div>
+									<div class="tablerow">
+										<div class="left-table">Telefone:</div>
+										<div id="divAppendTel" class="right-table"></div>
+									</div>
 								</div>
 								
 									<div id="PUsername">
@@ -188,7 +192,48 @@
 						</div>
 					</div>
 				</div>			
-			</div>			
+			</div>		
+					<!------------------------------------ PAGE PERFIL BARBEIRO------------------------------------------->
+			<div data-role="page" id="profilebar" data-title="profile" data-theme="b" data-position="fixed">
+				<div data-role="header" data-theme="a">
+					<h1>Meu Perfil</h1>
+					<a data-role="button"  onclick="window.location='#BARBEIROLOG'" data-icon="home" data-corners="false">Home</a>
+				</div>
+				<div data-role="content">
+									<!-- profile image -->
+									<center><img id="imgTestClick" src="img/perfil.png" alt="mee" /></center>
+									<!-- my profile -->
+					<div data-role="collapsible-set">
+							<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">
+								<h2 class="ui-collapsible-heading"><a class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-btn-up-d" href="#" data-corners="false" data-shadow="false" data-iconshadow="true" data-icon="plus" data-iconpos="left" data-theme="d">
+									<span class="ui-btn-text">Perfil Pessoal</span>
+								</a></h2>
+								<div class="ui-body ui-body-d ui-textalign-left">
+									<!-- profile fields -->
+									<div class="tablerow">
+										<div class="left-table">Nome:</div>
+										<div id="divAppendNomebar" class="right-table"></div>
+									</div>								   
+									<div class="tablerow">
+										<div class="left-table">Email:</div>
+										<div id="divAppendEmailbar" class="right-table"></div>
+									</div>
+									<div class="tablerow">
+										<div class="left-table">Telefone:</div>
+										<div id="divAppendTelbar" class="right-table"></div>
+									</div>
+								</div>
+								
+									<div id="PUsername">
+									</div>
+							</div>
+							
+						<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
+							<h2>WalkCut</h2>
+						</div>
+					</div>
+				</div>			
+			</div>				
 					<!------------------------------------ PAGE CLIENTE LOGADO ------------------------------------------->	
 			<div data-role="page" data-theme="b" id="CLIENTELOG">
 				<div  data-role="header" data-theme="a" data-position="fixed">
@@ -203,7 +248,7 @@
 			        </ul>
     			</div><!-- /panel -->
 				<div role="main" class="ui-content jqm-content jqm-fullwidth" >
-				<h3 class="ui-bar ui-bar-a" data-theme="b"'>Barbeiros Cadastrados</h3>
+				<h3 class="ui-bar ui-bar-a" data-theme="b"> Barbeiros Cadastrados </h3>
 				
 				<div class="ui-body ui-body-d ui-textalign-left" id="MOSTRAR">
 									
@@ -217,21 +262,58 @@
 					 <a href="#add-form" data-icon="bars" data-iconpos="notext">Menu</a>
 				</div>	
 				<div data-role="panel" data-position="left" data-position-fixed="true" data-display="reveal" data-theme="a" id="add-form" >
-				<a href="#profile"  class="ui-btn ui-icon-user ui-btn-icon-top">Meu Perfil</a>
+				<a href="#profilebar"  class="ui-btn ui-icon-user ui-btn-icon-top">Meu Perfil</a>
 				    <ul data-role="listview">
 			               <!-- <li><a href="#panel-fixed-page2">Configurações</a></li> -->
 							<li><a href="#panel-fixed-page2" onclick="sair()">Sair</a></li>
 			        </ul>
     			</div><!-- /panel -->
+				<center><h3 class="ui-bar ui-bar-a">Serviços Agendados</h3></center>
+				
 				<div role="main" class="ui-content jqm-content jqm-fullwidth" >
-				<h3 class="ui-bar ui-bar-a">Serviços Agendados</h3>
 				
 				<div class="ui-body ui-body-d ui-textalign-left" id="MOSTRARAGEND">
-									
+				
 				</div>
 				</div>
 			</div>
+				<!------------------------------------ PAGE AGENDAR ------------------------------------------->
+			<div data-role="page" id="Agendar" data-theme="b">
+			  <div  data-role="header" data-theme="a" data-position="fixed">
+					  <h1>WalkCut</h1>
+					  <a onclick="window.location='#CLIENTELOG'" class="previous">&laquo; </a>
+					 <!-- <a onclick="window.location='1.html'"  class="next"> &raquo;</a> -->
+				</div>		
+			    <form>
+			        <div style="padding:10px 20px;">
+						
+			            <center><img class="logo" alt="mee" src="img/Logo.png"/></center>  
+						<hr>
+						<center> <h3>Digite os dados para o agendamento:</h3> </center> 
+						<hr>
+						
+			            <input type="text" id="AgndNome" value="" placeholder="Nome:" data-theme="a">
+			
+			            <input type="text" id="AgndTelefone" value="" placeholder="Telefone:" data-theme="a">
+			
+						<label for="datetime"><b>Data/Horário do Serviço:</b></label>
+						<input type="text" id="AgndData" value="" placeholder="Ex: Seg as 12:12:" data-theme="a">
+						
+			            <input type="text" id="AgndEndereco" value="" placeholder="Endereço:" data-theme="a">
+						
+			
+					    <select name="select-native-3" id="AgndLocal" data-iconpos="left" data-theme="a">
+					        <option value="Salao">Salão</option>
+					        <option value="Domicilio">Domocílio</option>
+					    </select>
 
+						
+			            <input id="BtnAgendar" type="button" value="Confirmar Agendamento" class="shadowLogin" data-wrapper-class="ui-custom">
+			        </div>
+			    </form>
+			</div>
+			
+			
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="scripts/index1.js"></script>
