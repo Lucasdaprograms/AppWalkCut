@@ -109,7 +109,7 @@ switch ($request['acao']) {
 	case "loginbar":
 		$email = addslashes($_POST['email']);
 		$senha = addslashes($_POST['senha']);
-		$sql = "SELECT pk_id, nome, email, telefone, senha FROM barbeiro WHERE email = '$email' && senha = '$senha'";
+		$sql = "SELECT pk_id, nome, email, telefone, endereco, horario, senha FROM barbeiro WHERE email = '$email' && senha = '$senha'";
 		$arr = array();	
 		$arr['result'] = false;
 		$arr['err'] = 'vazio';
@@ -123,7 +123,9 @@ switch ($request['acao']) {
 			$arr['nome'] = $rowz[1];
 			$arr['email'] = $rowz[2];
 			$arr['telefone'] = $rowz[3];
-			$arr['senha'] = $rowz[4];
+			$arr['endereco'] = $rowz[4];
+			$arr['horario'] = $rowz[5];
+			$arr['senha'] = $rowz[6];
 		} 
 		else{
 			$arr['result'] = false;

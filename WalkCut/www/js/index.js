@@ -397,7 +397,7 @@ var app = {
 							tr +=		'</div>' + json[i].data
 							tr +=		'<hr>'
 							tr +=		'<div class="tablerow">'
-							tr +=			'><div class="left-table">Endereço</div>'
+							tr +=			'><div class="left-table">Endereco</div>'
 							tr +=			'<div  class="right-table"></div>'
 							tr +=		'</div>' + json[i].endereco
 							tr +=       '<hr>'
