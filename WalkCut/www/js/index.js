@@ -14,12 +14,39 @@ var app = {
 	    this.loginTable();
         app.atMostrar();
 		app.vAgenda();
+		app.initMap();
         document.getElementById('btnRegisterUser').addEventListener('click', this.dbRegisterUser);
 		document.getElementById('btnRegisterBar').addEventListener('click', this.dbRegisterBar);
         document.getElementById('btnLogin').addEventListener('click', this.dbMakeLogin);
 		document.getElementById('btnLoginBar').addEventListener('click', this.dbMakeLoginBar);
 		document.getElementById('BtnAgendar').addEventListener('click', this.Agendamento);
     },
+	
+	initMap: function(){
+		var div = document.getElementById('uniqueMap');
+		var map = null;
+        var lat = 51.49575692748839;
+        var lon = -0.14600197187496633;
+		map = new google.maps.Map(div, {
+			center: {lat: lat, lng: lon},
+			zoom: 15
+		});
+		var input = document.getElementById('searchbox');
+		var markers = [];
+		var search = new google.maps.places.SearchBox(input);
+		document.getElementById('btnSearch').addEventListener('click', function(){
+			var places = search.getPlaces();
+			search.setBounds(map.getBounds());
+			places.forEach(function(place) {
+				markers.push(new google.maps.Marker({
+				  map: map,
+				  position: place.geometry.location
+				}));
+				map.setCenter(place.geometry.location);
+			});
+			places = [];
+		});
+	},
 	
 	goToPageRegister: function(){
         $.mobile.changePage("#pageRegister");
