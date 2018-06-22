@@ -37,12 +37,30 @@ var app = {
 		document.getElementById('btnSearch').addEventListener('click', function(){
 			var places = search.getPlaces();
 			search.setBounds(map.getBounds());
-			places.forEach(function(place) {
+			
+			console.log(places);
+			places.forEach(function(place) {		
+				var geocoder = new google.maps.Geocoder();
+				geocoder.geocode( { 'address' : place.formatted_address }, function( results, status ) {
+					if( status == google.maps.GeocoderStatus.OK ) {
+						console.log(results[0].geometry.location.lat());
+						console.log(results[0].geometry.location.lng());
+						map.panTo( results[0].geometry.location );
+						var marker = new google.maps.Marker( {
+							map     : map,
+							position: results[0].geometry.location
+						} );
+					} else {
+						alert( 'Geocode was not successful for the following reason: ' + status );
+					}
+				});
 				markers.push(new google.maps.Marker({
 				  map: map,
 				  position: place.geometry.location
 				}));
-				map.setCenter(place.geometry.location);
+				map.panTo(place.geometry.location);
+				//var location{lat: varLat, lng: varLong};
+				place = null;
 			});
 			places = [];
 		});

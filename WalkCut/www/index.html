@@ -69,7 +69,8 @@
 					        <br>  
 						    <div data-role="form" class="form" >
 								<input type="submit" value="Cadastro de Cliente" onclick="window.location='#CADCLIENTE'">
-								<input type="submit" value="Cadastro de Barbeiro" onclick="window.location='#CADBARBEIRO'">  
+								<input type="submit" value="Cadastro de Barbeiro" onclick="window.location='#CADBARBEIRO'"> 
+								<input type="submit" value="Cadastro de Barbeiro" onclick="window.location='#pageMap'">  								
 							</div>
 					</div>
 				<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
@@ -313,11 +314,17 @@
 			    </form>
 			</div>
 				<!------------------------------------ PAGE MAPS ------------------------------------------->
-			<div id="pageMap" data-role="page">
-				<div id="search">
-					<input type="text" id="searchbox">
-					<input type="button" id="btnSearch" value="press">
-				</div>
+			<div id="pageMap" data-role="page" data-theme="b">
+				<div  data-role="header" data-theme="a" data-position="fixed">
+					 <h1>WalkCut</h1>
+				</div>	
+					<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">
+						<div id="search" data-theme="b">
+						<center><hr><h3>Buscar barbeiros pela localidade</h3><hr></center>
+							<input type="text" name="search-mini" data-mini="true" id="searchbox">
+							<input type="button" id="btnSearch" value="Procurar">
+						</div>
+					</div>
 				<div id="uniqueMap" style="width: 100vw; height: 60vh;">
 				</div>
 			</div>
