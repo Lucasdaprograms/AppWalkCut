@@ -109,7 +109,7 @@ switch ($request['acao']) {
 	case "loginbar":
 		$email = addslashes($_POST['email']);
 		$senha = addslashes($_POST['senha']);
-		$sql = "SELECT pk_id, nome, email, telefone, endereco, horario, senha FROM barbeiro WHERE email = '$email' && senha = '$senha'";
+		$sql = "SELECT pk_id, nome, email, telefone, horario, senha FROM barbeiro WHERE email = '$email' && senha = '$senha'";
 		$arr = array();	
 		$arr['result'] = false;
 		$arr['err'] = 'vazio';
@@ -123,9 +123,8 @@ switch ($request['acao']) {
 			$arr['nome'] = $rowz[1];
 			$arr['email'] = $rowz[2];
 			$arr['telefone'] = $rowz[3];
-			$arr['endereco'] = $rowz[4];
-			$arr['horario'] = $rowz[5];
-			$arr['senha'] = $rowz[6];
+			$arr['horario'] = $rowz[4];
+			$arr['senha'] = $rowz[5];
 		} 
 		else{
 			$arr['result'] = false;
@@ -139,10 +138,11 @@ switch ($request['acao']) {
 		$nome = addslashes($_POST['nome']);
 		$email = addslashes($_POST['email']);
 		$telefone = addslashes($_POST['telefone']);
-		$endereco = addslashes($_POST['endereco']);
 		$horario = addslashes($_POST['horario']);
-		$senha = addslashes($_POST['senha']);	
-		$sql = "INSERT INTO barbeiro (nome, email, telefone, endereco, horario, senha) VALUES ('$nome', '$email', '$telefone', '$endereco', '$horario', '$senha')";
+		$senha = addslashes($_POST['senha']);
+		$latitude = addslashes($_POST['latitude']);
+		$longitude = addslashes($_POST['longitude']);		
+		$sql = "INSERT INTO barbeiro (nome, email, telefone, horario, senha, latitude, longitude) VALUES ('$nome', '$email', '$telefone', '$horario', '$senha', '$latitude', '$longitude')";
 		$arr = array();
 		$arr['result'] = false;
 		$arr['err'] = 'vazio';

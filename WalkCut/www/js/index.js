@@ -14,15 +14,16 @@ var app = {
 	    this.loginTable();
         app.atMostrar();
 		app.vAgenda();
-		app.initMap();
+		//app.initMap();
+		app.getBaber();
         document.getElementById('btnRegisterUser').addEventListener('click', this.dbRegisterUser);
 		document.getElementById('btnRegisterBar').addEventListener('click', this.dbRegisterBar);
         document.getElementById('btnLogin').addEventListener('click', this.dbMakeLogin);
 		document.getElementById('btnLoginBar').addEventListener('click', this.dbMakeLoginBar);
 		document.getElementById('BtnAgendar').addEventListener('click', this.Agendamento);
     },
-	
-	initMap: function(){
+	//---------------------------------------- MAPA -----------------------------------------------------
+	/*initMap: function(){
 		var div = document.getElementById('uniqueMap');
 		var map = null;
         var lat = 51.49575692748839;
@@ -31,6 +32,24 @@ var app = {
 			center: {lat: lat, lng: lon},
 			zoom: 15
 		});
+		
+		 infoWindowContentIpgg  = '<div id="content">'+
+								'<div id="siteNotice">'+
+								'</div>'+
+								'<h1 id="firstHeading" class="firstHeading">IPGG - Instituto Paulista de Geriatria e Gerontologia</h1>'+
+								'<div id="bodyContent">'+
+								'<table>'+
+								'<tr>'+
+								'<td> Pra&ccedil;a Padre Aleixo Monteiro Mafra, 34 - S&atilde;o Miguel Paulista"</td>'+
+								'</tr>'+
+								'</table>'+
+								'<p>www.ipgg.saude.sp.gov.br</p>'+
+								'</div>'+
+								'</div>';
+		 var infowindow = new google.maps.InfoWindow({
+            content: infoWindowContentIpgg
+        });
+		
 		var input = document.getElementById('searchbox');
 		var markers = [];
 		var search = new google.maps.places.SearchBox(input);
@@ -43,8 +62,62 @@ var app = {
 				var geocoder = new google.maps.Geocoder();
 				geocoder.geocode( { 'address' : place.formatted_address }, function( results, status ) {
 					if( status == google.maps.GeocoderStatus.OK ) {
+						//lon = results[0].geometry.location.lng();
+						//console.log(lon);
 						console.log(results[0].geometry.location.lat());
 						console.log(results[0].geometry.location.lng());
+						map.panTo( results[0].geometry.location );
+						var marker = new google.maps.Marker( {
+							map     : map,
+							position: results[0].geometry.location
+						} );
+						marker.addListener('click', function() {
+						infowindow.open(map, marker);
+													});
+					} else {
+						alert( 'Geocode was not successful for the following reason: ' + status );
+					}
+				});
+				markers.push(new google.maps.Marker({
+				  map: map,
+				  position: place.geometry.location
+				}));
+				map.panTo(place.geometry.location);
+				//var location{lat: varLat, lng: varLong};
+				place = null;
+			});
+			places = [];
+		});
+	},*/
+	// ------------------- PEGAR LAT LON BARBEIRO ---------------------//
+	getBaber: function(){
+		var div = document.getElementById('mapbar');
+		var map = null;
+        var lat = 51.49575692748839;
+        var lon = -0.14600197187496633;
+		latbar = "";
+		lonbar = "";
+		map = new google.maps.Map(div, {
+			center: {lat: lat, lng: lon},
+			zoom: 15
+		});
+		var input = document.getElementById('searchbar');
+		var markers = [];
+		var search = new google.maps.places.SearchBox(input);
+		document.getElementById('btnSearchbar').addEventListener('click', function(){
+			var places = search.getPlaces();
+			search.setBounds(map.getBounds());
+			
+			console.log(places);
+			places.forEach(function(place) {		
+				var geocoder = new google.maps.Geocoder();
+				geocoder.geocode( { 'address' : place.formatted_address }, function( results, status ) {
+					if( status == google.maps.GeocoderStatus.OK ) {
+						lonbar = results[0].geometry.location.lng();
+						latbar = results[0].geometry.location.lat();
+						//console.log(lonbar);
+						//console.log(results[0].geometry.location.lat());
+						//console.log(results[0].geometry.location.lng());
 						map.panTo( results[0].geometry.location );
 						var marker = new google.maps.Marker( {
 							map     : map,
@@ -65,7 +138,8 @@ var app = {
 			places = [];
 		});
 	},
-	
+
+	// ------------------- LOGADO ---------------------//
 	goToPageRegister: function(){
         $.mobile.changePage("#pageRegister");
 	},
@@ -234,10 +308,13 @@ var app = {
 			var vNome = document.getElementById('registerNomebar').value;
 			var vEmail = document.getElementById('registerEmailbar').value;
 			var vTelefone= document.getElementById('registerTelefonebar').value;
-			var vEndereco= document.getElementById('registerEndereco').value;
 			var vHorario= document.getElementById('registerHorario').value;
 			var vSenha = document.getElementById('registerSenhabar').value;
 			var vSSenha = document.getElementById('registerConfirmarSenhabar').value;
+			var vLon = lonbar;
+			var vLat = latbar;
+			console.log(vLon);
+			console.log(vLat);
 			if(vNome==""){
 				alert('O campo nome deve estar preenchido');
 			}
@@ -262,6 +339,7 @@ var app = {
 			else if(vSenha!=vSSenha){
 				alert('As senhas não se correspondem');
 			}
+			
 			else{
 				$.ajax({
 					type: "POST",
@@ -271,9 +349,10 @@ var app = {
 						nome: vNome,
 						email: vEmail,
 						telefone: vTelefone,
-						endereco: vEndereco,
 						horario: vHorario,
-						senha: vSenha
+						senha: vSenha,
+						latitude: vLat,
+						longitude: vLon
 					},
 					dataType: "json", 
 					success: function (json) {
@@ -291,7 +370,6 @@ var app = {
 							document.getElementById('registerNomebar').value = "";
 							document.getElementById('registerEmailbar').value = "";
 							document.getElementById('registerTelefonebar').value = "";
-							document.getElementById('registerEndereco').value = "";
 							document.getElementById('registerHorario').value = "";
 							document.getElementById('registerSenhabar').value = "";
 							document.getElementById('registerConfirmarSenhabar').value = "";
@@ -305,7 +383,7 @@ var app = {
 			}
 		},
 //----------------------------------------------------------------------------------- MOSTRAR BARBEIRO ------------------------------------------------------------------------	
-	 atMostrar: function(){$.ajax({
+	atMostrar: function(){$.ajax({
             type: "GET",
             url: "http://localhost/index.php",
             data: {
@@ -313,49 +391,80 @@ var app = {
             },
             dataType: "json",
             success: function (json) {
+				
+								var div = document.getElementById('uniqueMap');
+								var map = null;
+								var lat = 51.49575692748839;
+								var lon = -0.14600197187496633;
+								map = new google.maps.Map(div, {
+									center: {lat: lat, lng: lon},
+									zoom: 15
+								});
+								var input = document.getElementById('searchbox');
+								var markers = [];
+								var marker = [];
+								var search = new google.maps.places.SearchBox(input);
+								document.getElementById('btnSearch').addEventListener('click', function(){
+									var places = search.getPlaces();
+									search.setBounds(map.getBounds());
+									console.log(places);
+									places.forEach(function(place) {		
+										var geocoder = new google.maps.Geocoder();
+										geocoder.geocode( { 'address' : place.formatted_address }, function( results, status ) {
+											if( status == google.maps.GeocoderStatus.OK ) {
+												//lon = results[0].geometry.location.lng();
+												//console.log(lon);
+												console.log(results[0].geometry.location.lat());
+												console.log(results[0].geometry.location.lng());
+												map.panTo( results[0].geometry.location );
+											} else {
+												alert( 'Geocode was not successful for the following reason: ' + status );
+											}
+										});
+										markers.push(new google.maps.Marker({
+										  map: map,
+										  position: place.geometry.location
+										}));
+										 marker.addListener('click', function() {
+											infowindow.open(map, marker);
+										  });
+										map.panTo(place.geometry.location);
+										//var location{lat: varLat, lng: varLong};
+										place = null;
+									});
+									places = [];
+								});
+							},
                 if(json){
 					console.log(json);
 						var tr="";
 						for(var i = 0; i < json.length; i++){
-							tr += '<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">'
-							tr +=	'<h2 class="ui-collapsible-heading"><a class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-btn-up-d" href="#" data-corners="false" data-shadow="false" data-iconshadow="true" data-icon="plus" data-iconpos="left" data-theme="d">'
-							tr +=		'<span class="ui-btn-text">' + json[i].nome +'</span>'
-							tr +=	'</a></h2>'
-							tr +=	'<div class="ui-body ui-body-d ui-textalign-left">'
-							tr +=		'<!-- profile fields -->'		   
-							tr +=		'<div class="tablerow">'
-							tr +=			'<div class="left-table">Email</div>'
-							tr +=			'<div  class="right-table"></div>'
-							tr +=		'</div>'+ json[i].email 
-							tr +=       '<hr>'
-							tr +=		'<div class="tablerow">'
-							tr +=			'<div class="left-table">Telefone</div>'
-							tr +=			'<div  class="right-table"></div>'
-							tr +=		'</div>'+ json[i].telefone
-							tr +=       '<hr>'
-							tr +=		'<div class="tablerow">'
-							tr +=			'<center><div class="left-table" >Endereco</div></center>'
-							tr +=			'<div  class="right-table"></div>'
-							tr +=		'</div>' + json[i].endereco
-							tr +=       '<hr>'
-							tr +=		'<div class="tablerow">'
-							tr +=			'<div class="left-table">Funcionamento</div>'
-							tr +=			'<div  class="right-table"></div>'
-							tr +=		'</div>' + json[i].horario 
-							tr +=		'<a href="#Agendar" data-position-to="window" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-mail" data-transition="pop">AGENDAR CORTE</a>'
-							tr +=		'</div>'
-							tr +=	'</div>'
-							document.getElementById('MOSTRAR').innerHTML = tr;           
+							 marker = new google.maps.Marker( {
+													map     : map,
+													position: {lat:json[i].latitude, lng:json[i].longitude},
+													title: json[i].nome
+												} );
+										     infowindow = new google.maps.InfoWindow({
+											 content: infoWindowContentIpgg
+																});
+											 infoWindowContentIpgg  = '<div id="content">'+
+																		'<div id="siteNotice">'+
+																		'</div>'+
+																		'<h1 id="firstHeading" class="firstHeading">IPGG - Instituto Paulista de Geriatria e Gerontologia</h1>'+
+																		'<div id="bodyContent">'+
+																		'<table>'+
+																		'<tr>'+
+																		'<td> Pra&ccedil;a Padre Aleixo Monteiro Mafra, 34 - S&atilde;o Miguel Paulista"</td>'+
+																		'</tr>'+
+																		'</table>'+
+																		'<p>www.ipgg.saude.sp.gov.br</p>'+
+																		'</div>'+
+																		'</div>';
+											
 						}
+						
                 }
-                else{
-					console.log(json);
-                }
-            },
-            error: function(){
-                console.log("##cliente::error");
-            }
-        })
+            }) 
 	 },
 //----------------------------------------------------------------------------------- REGISTRAR AGENDAMENTO ------------------------------------------------------------------------		 
 	Agendamento: function(){

@@ -130,9 +130,6 @@
 								<label for="registerTelefonebar"><b>Telefone:</b></label>
 								<input type="text" id="registerTelefonebar" placeholder="Telefone" data-wrapper-class="ui-custom">
 								
-								<label for="registerEndereco"><b>Endereço:</b></label>
-								<input type="text" id="registerEndereco" placeholder="Endereço" data-wrapper-class="ui-custom">
-								
 								<label for="registerHorario"><b>Horário e dias de atentimento:</b></label>
 								<input type="text" id="registerHorario" placeholder="ex: Seg a Sex: 08:00 as 12:00" data-wrapper-class="ui-custom">
 								
@@ -141,6 +138,15 @@
 								
 								<label for="registerConfirmarSenhabar"><b>Confirmar Senha:</b></label>
 								<input type="password" id="registerConfirmarSenhabar" placeholder="Confirmar senha" data-wrapper-class="ui-custom">
+								<br>
+									<label for="registerEndereco"><b>Endereço:</b></label>
+									<div id="search" data-theme="b">
+										<input type="text" name="search-mini" data-mini="true" placeholder="Digite seu endereço"id="searchbar">
+										<input type="button" id="btnSearchbar" value="Procurar Endereço">
+									</div>
+								
+								<div id="mapbar" style="width: 90vw; height: 22vh;">
+								</div>
 								
 								<br><br>
 								<input id="btnRegisterBar" type="button" value="Registrar" data-wrapper-class="ui-custom">
@@ -325,9 +331,10 @@
 							<input type="button" id="btnSearch" value="Procurar">
 						</div>
 					</div>
-				<div id="uniqueMap" style="width: 100vw; height: 60vh;">
-				</div>
+					<div id="uniqueMap" style="width: 100vw; height: 60vh;">
+					</div>
 			</div>
+				<!--------------------------------------->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHw6ZqEQxNxjW0aaF_FMaZR5KyeyEAl_M&libraries=places"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
