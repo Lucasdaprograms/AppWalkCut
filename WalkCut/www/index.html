@@ -26,10 +26,10 @@
 						       <div data-role="form" class="form" >
 									<form>
 										<Label for="clogin"> <b> Email:</b><br>
-										<input type="text" name="firstname" placeholder="Digite seu login" name="login" id="loginEmail" required>
+										<input type="text" name="firstname" placeholder="Digite seu login" name="login" id="loginEmail" data-mini="true" required>
 										<br>
 										<Label for="cpsw"> <b> Senha:</b><br>
-										<input type="password" name="lastname" placeholder="Digite sua senha" name="csenha" id="loginSenha" required>
+										<input type="password" name="lastname" placeholder="Digite sua senha" name="csenha" id="loginSenha"  data-mini="true" required>
 										<br>
 										<input id="btnLogin" type="button" value="Login" class="shadowLogin" data-wrapper-class="ui-custom">
 										<input type="button"  value="Não sou cadastrado" onclick="window.location='#ESCOLHACAD'" id="nsc">
@@ -69,8 +69,7 @@
 					        <br>  
 						    <div data-role="form" class="form" >
 								<input type="submit" value="Cadastro de Cliente" onclick="window.location='#CADCLIENTE'">
-								<input type="submit" value="Cadastro de Barbeiro" onclick="window.location='#CADBARBEIRO'"> 
-								<input type="submit" value="Cadastro de Barbeiro" onclick="window.location='#pageMap'">  								
+								<input type="submit" value="Cadastro de Barbeiro" onclick="window.location='#CADBARBEIRO'"> 							
 							</div>
 					</div>
 				<div data-role="footer" class="footer" data-theme="a" data-position="fixed">
@@ -89,15 +88,15 @@
 							<center>
 										   <br><br><hr>
 								<label for="registerNome"><b>Nome:</b></label>
-								<input type="text"  id="registerNome" placeholder="Nome" data-wrapper-class="ui-custom">
+								<input type="text"  id="registerNome" placeholder="Nome" data-wrapper-class="ui-custom" data-mini="true">
 								<label for="registerEmail"><b>Email:</b></label>
-								<input type="email" id="registerEmail" placeholder="E-mail" data-wrapper-class="ui-custom">
+								<input type="email" id="registerEmail" placeholder="E-mail" data-wrapper-class="ui-custom" data-mini="true">
 								<label for="registerTelefone"><b>Telefone:</b></label>
-								<input type="text" id="registerTelefone" placeholder="Telefone" data-wrapper-class="ui-custom">
+								<input type="text" id="registerTelefone" placeholder="Telefone" data-wrapper-class="ui-custom" data-mini="true">
 								<label for="registerSenha"><b>Senha:</b></label>
-								<input type="password" id="registerSenha" placeholder="Senha" data-wrapper-class="ui-custom">
+								<input type="password" id="registerSenha" placeholder="Senha" data-wrapper-class="ui-custom" data-mini="true">
 								<label for="registerConfirmarSenha"><b>Confirmar Senha:</b></label>
-								<input type="password" id="registerConfirmarSenha" placeholder="Confirmar senha" data-wrapper-class="ui-custom">
+								<input type="password" id="registerConfirmarSenha" placeholder="Confirmar senha" data-wrapper-class="ui-custom" data-mini="true">
 								
 								<br><br>
 								<input id="btnRegisterUser" type="button" value="registrar" data-wrapper-class="ui-custom">
@@ -122,22 +121,22 @@
 							<center>
 										   <br><br><hr>
 								<label for="registerNomebar"><b>Nome:</b></label>
-								<input type="text"  id="registerNomebar" placeholder="Nome" data-wrapper-class="ui-custom">
+								<input type="text"  id="registerNomebar" placeholder="Nome" data-wrapper-class="ui-custom" data-mini="true">
 								
 								<label for="registerEmailbar"><b>Email:</b></label>
-								<input type="email" id="registerEmailbar" placeholder="E-mail" data-wrapper-class="ui-custom">
+								<input type="email" id="registerEmailbar" placeholder="E-mail" data-wrapper-class="ui-custom" data-mini="true">
 								
 								<label for="registerTelefonebar"><b>Telefone:</b></label>
-								<input type="text" id="registerTelefonebar" placeholder="Telefone" data-wrapper-class="ui-custom">
+								<input type="text" id="registerTelefonebar" placeholder="Telefone" data-wrapper-class="ui-custom" data-mini="true">
 								
 								<label for="registerHorario"><b>Horário e dias de atentimento:</b></label>
-								<input type="text" id="registerHorario" placeholder="ex: Seg a Sex: 08:00 as 12:00" data-wrapper-class="ui-custom">
+								<input type="text" id="registerHorario" placeholder="ex: Seg a Sex: 08:00 as 12:00" data-wrapper-class="ui-custom" data-mini="true">
 								
 								<label for="registerSenhabar"><b>Senha:</b></label>
-								<input type="password" id="registerSenhabar" placeholder="Senha" data-wrapper-class="ui-custom">
+								<input type="password" id="registerSenhabar" placeholder="Senha" data-wrapper-class="ui-custom" data-mini="true">
 								
 								<label for="registerConfirmarSenhabar"><b>Confirmar Senha:</b></label>
-								<input type="password" id="registerConfirmarSenhabar" placeholder="Confirmar senha" data-wrapper-class="ui-custom">
+								<input type="password" id="registerConfirmarSenhabar" placeholder="Confirmar senha" data-wrapper-class="ui-custom" data-mini="true"> 
 								<br>
 									<label for="registerEndereco"><b>Endereço:</b></label>
 									<div id="search" data-theme="b">
@@ -242,8 +241,8 @@
 				</div>			
 			</div>				
 					<!------------------------------------ PAGE CLIENTE LOGADO ------------------------------------------->	
-			<div data-role="page" data-theme="b" id="CLIENTELOG">
-				<div  data-role="header" data-theme="a" data-position="fixed">
+			<div data-role="page"  id="CLIENTELOG">
+				<div  data-role="header" data-theme="b" data-position="fixed">
 					 <h1>WalkCut</h1>
 					 <a href="#add-form" data-icon="bars" data-iconpos="notext">Menu</a>
 				</div>	
@@ -255,11 +254,17 @@
 			        </ul>
     			</div><!-- /panel -->
 				<div role="main" class="ui-content jqm-content jqm-fullwidth" >
-				<h3 class="ui-bar ui-bar-a" data-theme="b"> Barbeiros Cadastrados </h3>
+				<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">
+						<div id="search" data-theme="b">
+						<center><hr><h3>Buscar barbeiros pela localidade</h3><hr></center>
+							<input type="text" name="search-mini" data-mini="true" id="searchbox">
+							<input type="button" id="btnSearch" value="Procurar">
+						</div>
+					</div>
+					<div id="uniqueMap" style="width: 91vw; height: 60vh;">
+					</div>
 				
-				<div class="ui-body ui-body-d ui-textalign-left" id="MOSTRAR">
-									
-				</div>
+				
 				</div>
 			</div>
 					<!------------------------------------ PAGE BARBEIRO LOGADO ------------------------------------------->
@@ -275,10 +280,8 @@
 							<li><a href="#panel-fixed-page2" onclick="sair()">Sair</a></li>
 			        </ul>
     			</div><!-- /panel -->
-				<center><h3 class="ui-bar ui-bar-a">Serviços Agendados</h3></center>
-				
 				<div role="main" class="ui-content jqm-content jqm-fullwidth" >
-				
+					<center><h3 class="ui-bar ui-bar-a">Serviços Agendados</h3></center>
 				<div class="ui-body ui-body-d ui-textalign-left" id="MOSTRARAGEND">
 				
 				</div>
@@ -299,14 +302,14 @@
 						<center> <h3>Digite os dados para o agendamento:</h3> </center> 
 						<hr>
 						
-			            <input type="text" id="AgndNome" value="" placeholder="Nome:" data-theme="a">
+			            <input type="text" id="AgndNome" value="" placeholder="Nome:" data-theme="a" data-mini="true">
 			
-			            <input type="text" id="AgndTelefone" value="" placeholder="Telefone:" data-theme="a">
+			            <input type="text" id="AgndTelefone" value="" placeholder="Telefone:" data-theme="a" data-mini="true">
 			
 						<label for="datetime"><b>Data/Horário do Serviço:</b></label>
-						<input type="text" id="AgndData" value="" placeholder="Ex: Seg as 12:12:" data-theme="a">
+						<input type="text" id="AgndData" value="" placeholder="Ex: Seg as 12:12:" data-theme="a" data-mini="true">
 						
-			            <input type="text" id="AgndEndereco" value="" placeholder="Endereço:" data-theme="a">
+			            <input type="text" id="AgndEndereco" value="" placeholder="Endereço:" data-theme="a" data-mini="true">
 						
 			
 					    <select name="select-native-3" id="AgndLocal" data-iconpos="left" data-theme="a">
@@ -320,8 +323,8 @@
 			    </form>
 			</div>
 				<!------------------------------------ PAGE MAPS ------------------------------------------->
-			<div id="pageMap" data-role="page" data-theme="b">
-				<div  data-role="header" data-theme="a" data-position="fixed">
+			<!--<div id="pageMap" data-role="page">
+				<div  data-role="header" data-theme="b" data-position="fixed">
 					 <h1>WalkCut</h1>
 				</div>	
 					<div data-role="collapsible" data-corners="false" class="ui-corner-none" data-collapsed="false">
@@ -333,7 +336,7 @@
 					</div>
 					<div id="uniqueMap" style="width: 100vw; height: 60vh;">
 					</div>
-			</div>
+			</div>-->
 				<!--------------------------------------->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHw6ZqEQxNxjW0aaF_FMaZR5KyeyEAl_M&libraries=places"></script>
     <script type="text/javascript" src="cordova.js"></script>

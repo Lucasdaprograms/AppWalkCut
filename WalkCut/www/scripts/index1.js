@@ -18,11 +18,7 @@ function sair()
 		var r=confirm("Deseja mesmo sair?");
 		if (r==true)
 		  {
-		   window.location.href = "#LOGIN";
-		  }
-		else
-		  {
-		  x="Você pressionou Cancelar!";
+		   $.mobile.changePage('#LOGIN');
 		  }
 		document.getElementById("demo").innerHTML=x;
 	};

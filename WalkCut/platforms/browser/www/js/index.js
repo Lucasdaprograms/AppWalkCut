@@ -14,7 +14,6 @@ var app = {
 	    this.loginTable();
         app.atMostrar();
 		app.vAgenda();
-		//app.initMap();
 		app.getBaber();
         document.getElementById('btnRegisterUser').addEventListener('click', this.dbRegisterUser);
 		document.getElementById('btnRegisterBar').addEventListener('click', this.dbRegisterBar);
@@ -22,73 +21,7 @@ var app = {
 		document.getElementById('btnLoginBar').addEventListener('click', this.dbMakeLoginBar);
 		document.getElementById('BtnAgendar').addEventListener('click', this.Agendamento);
     },
-	//---------------------------------------- MAPA -----------------------------------------------------
-	/*initMap: function(){
-		var div = document.getElementById('uniqueMap');
-		var map = null;
-        var lat = 51.49575692748839;
-        var lon = -0.14600197187496633;
-		map = new google.maps.Map(div, {
-			center: {lat: lat, lng: lon},
-			zoom: 15
-		});
-		
-		 infoWindowContentIpgg  = '<div id="content">'+
-								'<div id="siteNotice">'+
-								'</div>'+
-								'<h1 id="firstHeading" class="firstHeading">IPGG - Instituto Paulista de Geriatria e Gerontologia</h1>'+
-								'<div id="bodyContent">'+
-								'<table>'+
-								'<tr>'+
-								'<td> Pra&ccedil;a Padre Aleixo Monteiro Mafra, 34 - S&atilde;o Miguel Paulista"</td>'+
-								'</tr>'+
-								'</table>'+
-								'<p>www.ipgg.saude.sp.gov.br</p>'+
-								'</div>'+
-								'</div>';
-		 var infowindow = new google.maps.InfoWindow({
-            content: infoWindowContentIpgg
-        });
-		
-		var input = document.getElementById('searchbox');
-		var markers = [];
-		var search = new google.maps.places.SearchBox(input);
-		document.getElementById('btnSearch').addEventListener('click', function(){
-			var places = search.getPlaces();
-			search.setBounds(map.getBounds());
-			
-			console.log(places);
-			places.forEach(function(place) {		
-				var geocoder = new google.maps.Geocoder();
-				geocoder.geocode( { 'address' : place.formatted_address }, function( results, status ) {
-					if( status == google.maps.GeocoderStatus.OK ) {
-						//lon = results[0].geometry.location.lng();
-						//console.log(lon);
-						console.log(results[0].geometry.location.lat());
-						console.log(results[0].geometry.location.lng());
-						map.panTo( results[0].geometry.location );
-						var marker = new google.maps.Marker( {
-							map     : map,
-							position: results[0].geometry.location
-						} );
-						marker.addListener('click', function() {
-						infowindow.open(map, marker);
-													});
-					} else {
-						alert( 'Geocode was not successful for the following reason: ' + status );
-					}
-				});
-				markers.push(new google.maps.Marker({
-				  map: map,
-				  position: place.geometry.location
-				}));
-				map.panTo(place.geometry.location);
-				//var location{lat: varLat, lng: varLong};
-				place = null;
-			});
-			places = [];
-		});
-	},*/
+	
 	// ------------------- PEGAR LAT LON BARBEIRO ---------------------//
 	getBaber: function(){
 		var div = document.getElementById('mapbar');
@@ -383,7 +316,44 @@ var app = {
 			}
 		},
 //----------------------------------------------------------------------------------- MOSTRAR BARBEIRO ------------------------------------------------------------------------	
-	atMostrar: function(){$.ajax({
+	atMostrar: function(){
+		var div = document.getElementById('uniqueMap');
+		var map = null;
+		var infowindow = new google.maps.InfoWindow();
+		var input = document.getElementById('searchbox');
+		var markerMec;
+		var mecanicoPin = 'img/Barber.png';
+        var lat = 51.49575692748839;
+        var lon = -0.14600197187496633;
+		map = new google.maps.Map(div, {
+			center: {lat: lat, lng: lon},
+			zoom: 15
+		});
+		var search = new google.maps.places.SearchBox(input);
+		document.getElementById('btnSearch').addEventListener('click', function(){
+			var places = search.getPlaces();
+			search.setBounds(map.getBounds());
+			console.log(places);
+			places.forEach(function(place) {		
+				var geocoder = new google.maps.Geocoder();
+				geocoder.geocode( { 'address' : place.formatted_address }, function( results, status ) {
+					if( status == google.maps.GeocoderStatus.OK ) {
+						//lon = results[0].geometry.location.lng();
+						//console.log(lon);
+						map.panTo( results[0].geometry.location );
+					} else {
+						alert( 'Geocode was not successful for the following reason: ' + status );
+					}
+				});
+			
+				map.panTo(place.geometry.location);
+				//var location{lat: varLat, lng: varLong};
+				place = null;
+			});
+			places = [];
+		});
+		
+		$.ajax({
             type: "GET",
             url: "http://localhost/index.php",
             data: {
@@ -391,81 +361,29 @@ var app = {
             },
             dataType: "json",
             success: function (json) {
-				
-								var div = document.getElementById('uniqueMap');
-								var map = null;
-								var lat = 51.49575692748839;
-								var lon = -0.14600197187496633;
-								map = new google.maps.Map(div, {
-									center: {lat: lat, lng: lon},
-									zoom: 15
-								});
-								var input = document.getElementById('searchbox');
-								var markers = [];
-								var marker = [];
-								var search = new google.maps.places.SearchBox(input);
-								document.getElementById('btnSearch').addEventListener('click', function(){
-									var places = search.getPlaces();
-									search.setBounds(map.getBounds());
-									console.log(places);
-									places.forEach(function(place) {		
-										var geocoder = new google.maps.Geocoder();
-										geocoder.geocode( { 'address' : place.formatted_address }, function( results, status ) {
-											if( status == google.maps.GeocoderStatus.OK ) {
-												//lon = results[0].geometry.location.lng();
-												//console.log(lon);
-												console.log(results[0].geometry.location.lat());
-												console.log(results[0].geometry.location.lng());
-												map.panTo( results[0].geometry.location );
-											} else {
-												alert( 'Geocode was not successful for the following reason: ' + status );
-											}
-										});
-										markers.push(new google.maps.Marker({
-										  map: map,
-										  position: place.geometry.location
-										}));
-										 marker.event.addEventListener('click', function() {
-											infowindow.open(map, marker);
-										  });
-										map.panTo(place.geometry.location);
-										//var location{lat: varLat, lng: varLong};
-										place = null;
-									});
-									places = [];
-								});
-							},
-                if(json){
 					console.log(json);
-						var tr="";
-						for(var i = 0; i < json.length; i++){
-							 marker = new google.maps.Marker( {
-													map     : map,
-													position: {lat:json[i].latitude, lng:json[i].longitude},
-													title: json[i].nome
-												} );
-										     infowindow = new google.maps.InfoWindow({
-											 content: infoWindowContentIpgg
-																});
-											 infoWindowContentIpgg  = '<div id="content">'+
-																		'<div id="siteNotice">'+
-																		'</div>'+
-																		'<h1 id="firstHeading" class="firstHeading">IPGG - Instituto Paulista de Geriatria e Gerontologia</h1>'+
-																		'<div id="bodyContent">'+
-																		'<table>'+
-																		'<tr>'+
-																		'<td> Pra&ccedil;a Padre Aleixo Monteiro Mafra, 34 - S&atilde;o Miguel Paulista"</td>'+
-																		'</tr>'+
-																		'</table>'+
-																		'<p>www.ipgg.saude.sp.gov.br</p>'+
-																		'</div>'+
-																		'</div>';
-											
-						}
+				for(var i = 0; i < json.length; i++){
+				 markerMec = new google.maps.Marker({
+                            position: new google.maps.LatLng(json[i].latitude, json[i].longitude),
+                            map: map,
+                            icon: mecanicoPin,
+							title: 'Hello World!'
+                        });
+							google.maps.event.addListener(markerMec, 'click', (function (marker) {
+							var nome = json[i].nome;
+							var telefone = json[i].telefone;
+							var horario = json[i].horario;
+							return function () {
+                            infowindow.setContent("<div data-theme=b><hr><H3>Nome:"+nome+"</H3><hr><H3>Telefone:"+telefone+"</H3><hr><H3>Horario:"+horario+"</H3><hr> <input  type=button onclick=window.location='#Agendar' value=Agendar> </div>");
+                            infowindow.open(map, marker);
+                        }
+                    })(markerMec));	
+				}
+			}
+            })
 						
-                }
-            }) 
-	 },
+	},
+	
 //----------------------------------------------------------------------------------- REGISTRAR AGENDAMENTO ------------------------------------------------------------------------		 
 	Agendamento: function(){
 			var vNome = document.getElementById('AgndNome').value;
